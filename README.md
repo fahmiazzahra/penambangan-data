@@ -1,6 +1,6 @@
 # Klasifikasi Tingkat Risiko Kesehatan Ibu Hamil
 
-**Perbandingan Naive Bayes, Decision Tree, dan K-Nearest Neighbor dengan Protokol Evaluasi Bebas Kebocoran Data Duplikat**
+**Perbandingan Algoritma Naive Bayes, Decision Tree, dan K-Nearest Neighbor untuk Klasifikasi Tingkat Risiko Kesehatan Ibu Hamil dengan Penanganan Data Duplikat**
 
 Proposal UTS dan aplikasi (luaran UAS) mata kuliah Penambangan Data, Teknik Informatika S1, Universitas Dian Nuswantoro.
 
@@ -9,6 +9,7 @@ Proposal UTS dan aplikasi (luaran UAS) mata kuliah Penambangan Data, Teknik Info
 | Nama | Fahmi Fatmawati Azzahra |
 | NIM | A11.2024.15831 |
 | Kelas | Penambangan Data / A11.4505 |
+| Dosen pengampu | Junta Zeniarja, M.Kom |
 
 ## Inti penelitian
 

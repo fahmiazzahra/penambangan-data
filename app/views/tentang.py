@@ -4,9 +4,9 @@ st.title("Tentang Aplikasi")
 
 st.markdown(
     """
-Aplikasi ini adalah luaran penelitian **"Perbandingan Naive Bayes, Decision Tree, dan K-Nearest Neighbor
-untuk Klasifikasi Tingkat Risiko Kesehatan Ibu Hamil dengan Protokol Evaluasi Bebas Kebocoran Data
-Duplikat"**, yang disusun untuk UTS–UAS mata kuliah Penambangan Data.
+Aplikasi ini adalah luaran penelitian **"Perbandingan Algoritma Naive Bayes, Decision Tree, dan K-Nearest
+Neighbor untuk Klasifikasi Tingkat Risiko Kesehatan Ibu Hamil dengan Penanganan Data Duplikat"**, yang disusun
+untuk UTS–UAS mata kuliah Penambangan Data.
 """
 )
 
@@ -21,6 +21,7 @@ with c1, st.container(border=True):
 | Nama | Fahmi Fatmawati Azzahra |
 | NIM | A11.2024.15831 |
 | Kelas | Penambangan Data / A11.4505 |
+| Dosen pengampu | Junta Zeniarja, M.Kom |
 | Program studi | Teknik Informatika S1, Fakultas Ilmu Komputer, Universitas Dian Nuswantoro |
 """
     )
