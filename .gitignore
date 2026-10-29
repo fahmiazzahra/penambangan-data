@@ -1,0 +1,18 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# File sementara Word / Office
+~$*
+*.tmp
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
