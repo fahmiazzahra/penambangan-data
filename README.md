@@ -65,7 +65,7 @@ Detail lengkap ada di `reports/results/` dan halaman **Evaluasi Model** pada apl
 │   └── results/          hasil eksperimen (CSV/JSON), log, hasil uji aplikasi
 ├── tests/uji_aplikasi.py pengujian black-box aplikasi (11 kasus uji)
 └── proposal/
-    └── Proposal UTS Penambangan Data - ... .docx / .pdf   (10 halaman)
+    └── Proposal UTS - A11.2024.15831 - ... .docx / .pdf   (10 halaman)
 ```
 
 ## Cara menjalankan
