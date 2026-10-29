@@ -1,0 +1,27 @@
+{
+  "repeats": 10,
+  "outer_folds": 10,
+  "inner_folds": 5,
+  "n_per_skenario": {
+    "A": 1014,
+    "B": 452,
+    "C": 381
+  },
+  "baris_uji_dengan_salinan_di_data_latih": {
+    "A": {
+      "rata2_persen": 83.42244224422441,
+      "min_persen": 72.54901960784314,
+      "maks_persen": 90.0990099009901
+    },
+    "B": {
+      "rata2_persen": 0.0,
+      "min_persen": 0.0,
+      "maks_persen": 0.0
+    },
+    "C": {
+      "rata2_persen": 0.0,
+      "min_persen": 0.0,
+      "maks_persen": 0.0
+    }
+  }
+}

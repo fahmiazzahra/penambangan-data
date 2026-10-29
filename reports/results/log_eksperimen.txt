@@ -1,0 +1,101 @@
+Total tugas evaluasi: 2700
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 12 concurrent workers.
+[Parallel(n_jobs=-1)]: Done  48 tasks      | elapsed:   51.1s
+[Parallel(n_jobs=-1)]: Done 138 tasks      | elapsed:  2.9min
+[Parallel(n_jobs=-1)]: Done 264 tasks      | elapsed:  5.7min
+[Parallel(n_jobs=-1)]: Done 426 tasks      | elapsed:  9.2min
+[Parallel(n_jobs=-1)]: Done 624 tasks      | elapsed: 12.5min
+[Parallel(n_jobs=-1)]: Done 858 tasks      | elapsed: 13.4min
+[Parallel(n_jobs=-1)]: Done 1128 tasks      | elapsed: 14.4min
+[Parallel(n_jobs=-1)]: Done 1434 tasks      | elapsed: 15.6min
+[Parallel(n_jobs=-1)]: Done 1776 tasks      | elapsed: 16.9min
+[Parallel(n_jobs=-1)]: Done 2154 tasks      | elapsed: 18.4min
+[Parallel(n_jobs=-1)]: Done 2568 tasks      | elapsed: 20.0min
+[Parallel(n_jobs=-1)]: Done 2700 out of 2700 | elapsed: 20.6min finished
+Selesai dalam 1236.8 detik
+skenario    model konfigurasi  accuracy_mean  f1_macro_mean  f1_macro_std  recall_high_mean  auc_ovr_macro_mean  waktu_latih_ms_mean  ukuran_model_mean
+       A BASELINE     default          0.400          0.191         0.001             0.000               0.500                9.789               3.00
+       A       DT     default          0.843          0.847         0.035             0.918               0.939               24.970             318.24
+       A       DT       tuned          0.844          0.848         0.032             0.919               0.940               29.533             330.62
+       A      KNN     default          0.708          0.712         0.041             0.760               0.873               20.042            5475.60
+       A      KNN       tuned          0.846          0.850         0.033             0.899               0.916               21.321            5475.60
+       A     NB-G     default          0.599          0.557         0.039             0.637               0.778               19.163              39.00
+       A     NB-G       tuned          0.606          0.559         0.039             0.677               0.759               17.457              39.00
+       A     NB-K     default          0.622          0.621         0.054             0.703               0.791               42.889              93.00
+       A     NB-K       tuned          0.700          0.699         0.046             0.756               0.845               79.633             180.84
+       B BASELINE     default          0.518          0.227         0.003             0.000               0.500                2.021               3.00
+       B       DT     default          0.675          0.613         0.063             0.740               0.726                5.772             284.58
+       B       DT       tuned          0.693          0.614         0.072             0.739               0.779                6.615              65.50
+       B      KNN     default          0.639          0.533         0.068             0.666               0.738                4.520            2440.80
+       B      KNN       tuned          0.669          0.569         0.067             0.658               0.767                5.841            2440.80
+       B     NB-G     default          0.647          0.518         0.068             0.527               0.769                3.939              39.00
+       B     NB-G       tuned          0.646          0.514         0.069             0.527               0.769                4.091              39.00
+       B     NB-K     default          0.667          0.554         0.075             0.670               0.754               10.235              93.00
+       B     NB-K       tuned          0.698          0.615         0.081             0.702               0.793               13.580             176.16
+       C BASELINE     default          0.535          0.232         0.004             0.000               0.500                2.160               3.00
+       C       DT     default          0.721          0.658         0.076             0.753               0.758                5.542             177.80
+       C       DT       tuned          0.754          0.677         0.072             0.773               0.823                6.263              46.80
+       C      KNN     default          0.670          0.559         0.075             0.680               0.777                4.338            2057.40
+       C      KNN       tuned          0.718          0.617         0.076             0.698               0.814                5.746            2057.40
+       C     NB-G     default          0.693          0.572         0.079             0.577               0.804                4.235              39.00
+       C     NB-G       tuned          0.693          0.569         0.078             0.574               0.804                4.396              39.00
+       C     NB-K     default          0.703          0.583         0.071             0.677               0.804               11.029              93.00
+       C     NB-K       tuned          0.747          0.662         0.084             0.719               0.830               15.749             164.10
+{
+  "repeats": 10,
+  "outer_folds": 10,
+  "inner_folds": 5,
+  "n_per_skenario": {
+    "A": 1014,
+    "B": 452,
+    "C": 381
+  },
+  "baris_uji_dengan_salinan_di_data_latih": {
+    "A": {
+      "rata2_persen": 83.42244224422441,
+      "min_persen": 72.54901960784314,
+      "maks_persen": 90.0990099009901
+    },
+    "B": {
+      "rata2_persen": 0.0,
+      "min_persen": 0.0,
+      "maks_persen": 0.0
+    },
+    "C": {
+      "rata2_persen": 0.0,
+      "min_persen": 0.0,
+      "maks_persen": 0.0
+    }
+  }
+}
+skenario   metrik  model_1 model_2  selisih_rata2        t      p  p_holm  signifikan_0.05
+       A f1_macro BASELINE    NB-G        -0.3681 -27.2324 0.0000  0.0000             True
+       A f1_macro BASELINE    NB-K        -0.5085 -32.3257 0.0000  0.0000             True
+       A f1_macro BASELINE      DT        -0.6579 -59.5118 0.0000  0.0000             True
+       A f1_macro BASELINE     KNN        -0.6591 -57.8495 0.0000  0.0000             True
+       A f1_macro     NB-G    NB-K        -0.1404  -8.0081 0.0000  0.0000             True
+       A f1_macro     NB-G      DT        -0.2898 -19.5096 0.0000  0.0000             True
+       A f1_macro     NB-G     KNN        -0.2911 -18.8452 0.0000  0.0000             True
+       A f1_macro     NB-K      DT        -0.1494  -8.3860 0.0000  0.0000             True
+       A f1_macro     NB-K     KNN        -0.1507  -8.6114 0.0000  0.0000             True
+       A f1_macro       DT     KNN        -0.0013  -0.1209 0.9040  0.9040            False
+       B f1_macro BASELINE    NB-G        -0.2870 -11.7913 0.0000  0.0000             True
+       B f1_macro BASELINE    NB-K        -0.3878 -13.6748 0.0000  0.0000             True
+       B f1_macro BASELINE      DT        -0.3867 -15.3585 0.0000  0.0000             True
+       B f1_macro BASELINE     KNN        -0.3412 -14.6147 0.0000  0.0000             True
+       B f1_macro     NB-G    NB-K        -0.1008  -3.6327 0.0004  0.0027             True
+       B f1_macro     NB-G      DT        -0.0998  -3.0971 0.0025  0.0127             True
+       B f1_macro     NB-G     KNN        -0.0542  -1.9140 0.0585  0.2340            False
+       B f1_macro     NB-K      DT         0.0011   0.0417 0.9669  0.9669            False
+       B f1_macro     NB-K     KNN         0.0466   1.8967 0.0608  0.2340            False
+       B f1_macro       DT     KNN         0.0455   1.8228 0.0714  0.2340            False
+       C f1_macro BASELINE    NB-G        -0.3368 -12.3024 0.0000  0.0000             True
+       C f1_macro BASELINE    NB-K        -0.4295 -14.6927 0.0000  0.0000             True
+       C f1_macro BASELINE      DT        -0.4446 -17.8791 0.0000  0.0000             True
+       C f1_macro BASELINE     KNN        -0.3842 -14.5444 0.0000  0.0000             True
+       C f1_macro     NB-G    NB-K        -0.0927  -2.8543 0.0053  0.0263             True
+       C f1_macro     NB-G      DT        -0.1077  -3.3625 0.0011  0.0066             True
+       C f1_macro     NB-G     KNN        -0.0473  -1.3203 0.1898  0.4081            False
+       C f1_macro     NB-K      DT        -0.0150  -0.5382 0.5917  0.5917            False
+       C f1_macro     NB-K     KNN         0.0454   1.5030 0.1360  0.4081            False
+       C f1_macro       DT     KNN         0.0604   1.9666 0.0520  0.2081            False

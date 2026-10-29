@@ -1,0 +1,218 @@
+[
+  {
+    "skenario":"A",
+    "model":"DT",
+    "best_params":[
+      [
+        "{\"clf__class_weight\": \"balanced\", \"clf__criterion\": \"entropy\", \"clf__max_depth\": null, \"clf__min_samples_leaf\": 1}",
+        44
+      ],
+      [
+        "{\"clf__class_weight\": \"balanced\", \"clf__criterion\": \"gini\", \"clf__max_depth\": null, \"clf__min_samples_leaf\": 1}",
+        28
+      ],
+      [
+        "{\"clf__class_weight\": null, \"clf__criterion\": \"entropy\", \"clf__max_depth\": null, \"clf__min_samples_leaf\": 1}",
+        17
+      ]
+    ]
+  },
+  {
+    "skenario":"A",
+    "model":"KNN",
+    "best_params":[
+      [
+        "{\"clf__n_neighbors\": 1, \"clf__p\": 1, \"clf__weights\": \"uniform\", \"skala\": \"StandardScaler\"}",
+        30
+      ],
+      [
+        "{\"clf__n_neighbors\": 1, \"clf__p\": 2, \"clf__weights\": \"uniform\", \"skala\": \"StandardScaler\"}",
+        15
+      ],
+      [
+        "{\"clf__n_neighbors\": 1, \"clf__p\": 1, \"clf__weights\": \"uniform\", \"skala\": \"MinMaxScaler\"}",
+        8
+      ]
+    ]
+  },
+  {
+    "skenario":"A",
+    "model":"NB-G",
+    "best_params":[
+      [
+        "{\"clf__var_smoothing\": 0.01}",
+        59
+      ],
+      [
+        "{\"clf__var_smoothing\": 0.001}",
+        20
+      ],
+      [
+        "{\"clf__var_smoothing\": 0.0001}",
+        8
+      ]
+    ]
+  },
+  {
+    "skenario":"A",
+    "model":"NB-K",
+    "best_params":[
+      [
+        "{\"clf__alpha\": 0.5, \"clf__min_categories\": 10, \"diskretisasi__n_bins\": 10, \"diskretisasi__strategy\": \"kmeans\"}",
+        55
+      ],
+      [
+        "{\"clf__alpha\": 1.0, \"clf__min_categories\": 10, \"diskretisasi__n_bins\": 10, \"diskretisasi__strategy\": \"kmeans\"}",
+        34
+      ],
+      [
+        "{\"clf__alpha\": 0.5, \"clf__min_categories\": 10, \"diskretisasi__n_bins\": 10, \"diskretisasi__strategy\": \"uniform\"}",
+        4
+      ]
+    ]
+  },
+  {
+    "skenario":"B",
+    "model":"DT",
+    "best_params":[
+      [
+        "{\"clf__class_weight\": \"balanced\", \"clf__criterion\": \"gini\", \"clf__max_depth\": 4, \"clf__min_samples_leaf\": 5}",
+        6
+      ],
+      [
+        "{\"clf__class_weight\": \"balanced\", \"clf__criterion\": \"entropy\", \"clf__max_depth\": 5, \"clf__min_samples_leaf\": 3}",
+        6
+      ],
+      [
+        "{\"clf__class_weight\": \"balanced\", \"clf__criterion\": \"gini\", \"clf__max_depth\": 4, \"clf__min_samples_leaf\": 3}",
+        6
+      ]
+    ]
+  },
+  {
+    "skenario":"B",
+    "model":"KNN",
+    "best_params":[
+      [
+        "{\"clf__n_neighbors\": 13, \"clf__p\": 1, \"clf__weights\": \"uniform\", \"skala\": \"StandardScaler\"}",
+        8
+      ],
+      [
+        "{\"clf__n_neighbors\": 7, \"clf__p\": 2, \"clf__weights\": \"uniform\", \"skala\": \"StandardScaler\"}",
+        8
+      ],
+      [
+        "{\"clf__n_neighbors\": 5, \"clf__p\": 1, \"clf__weights\": \"distance\", \"skala\": \"StandardScaler\"}",
+        5
+      ]
+    ]
+  },
+  {
+    "skenario":"B",
+    "model":"NB-G",
+    "best_params":[
+      [
+        "{\"clf__var_smoothing\": 1e-12}",
+        54
+      ],
+      [
+        "{\"clf__var_smoothing\": 0.0001}",
+        28
+      ],
+      [
+        "{\"clf__var_smoothing\": 0.001}",
+        11
+      ]
+    ]
+  },
+  {
+    "skenario":"B",
+    "model":"NB-K",
+    "best_params":[
+      [
+        "{\"clf__alpha\": 0.5, \"clf__min_categories\": 10, \"diskretisasi__n_bins\": 10, \"diskretisasi__strategy\": \"kmeans\"}",
+        35
+      ],
+      [
+        "{\"clf__alpha\": 0.5, \"clf__min_categories\": 10, \"diskretisasi__n_bins\": 10, \"diskretisasi__strategy\": \"uniform\"}",
+        21
+      ],
+      [
+        "{\"clf__alpha\": 1.0, \"clf__min_categories\": 10, \"diskretisasi__n_bins\": 10, \"diskretisasi__strategy\": \"kmeans\"}",
+        12
+      ]
+    ]
+  },
+  {
+    "skenario":"C",
+    "model":"DT",
+    "best_params":[
+      [
+        "{\"clf__class_weight\": \"balanced\", \"clf__criterion\": \"entropy\", \"clf__max_depth\": 4, \"clf__min_samples_leaf\": 5}",
+        8
+      ],
+      [
+        "{\"clf__class_weight\": \"balanced\", \"clf__criterion\": \"entropy\", \"clf__max_depth\": 4, \"clf__min_samples_leaf\": 3}",
+        8
+      ],
+      [
+        "{\"clf__class_weight\": null, \"clf__criterion\": \"entropy\", \"clf__max_depth\": 4, \"clf__min_samples_leaf\": 5}",
+        5
+      ]
+    ]
+  },
+  {
+    "skenario":"C",
+    "model":"KNN",
+    "best_params":[
+      [
+        "{\"clf__n_neighbors\": 13, \"clf__p\": 1, \"clf__weights\": \"uniform\", \"skala\": \"StandardScaler\"}",
+        8
+      ],
+      [
+        "{\"clf__n_neighbors\": 11, \"clf__p\": 1, \"clf__weights\": \"uniform\", \"skala\": \"StandardScaler\"}",
+        8
+      ],
+      [
+        "{\"clf__n_neighbors\": 5, \"clf__p\": 1, \"clf__weights\": \"distance\", \"skala\": \"StandardScaler\"}",
+        6
+      ]
+    ]
+  },
+  {
+    "skenario":"C",
+    "model":"NB-G",
+    "best_params":[
+      [
+        "{\"clf__var_smoothing\": 1e-12}",
+        62
+      ],
+      [
+        "{\"clf__var_smoothing\": 0.0001}",
+        25
+      ],
+      [
+        "{\"clf__var_smoothing\": 1e-05}",
+        8
+      ]
+    ]
+  },
+  {
+    "skenario":"C",
+    "model":"NB-K",
+    "best_params":[
+      [
+        "{\"clf__alpha\": 0.5, \"clf__min_categories\": 10, \"diskretisasi__n_bins\": 10, \"diskretisasi__strategy\": \"kmeans\"}",
+        47
+      ],
+      [
+        "{\"clf__alpha\": 0.5, \"clf__min_categories\": 10, \"diskretisasi__n_bins\": 10, \"diskretisasi__strategy\": \"uniform\"}",
+        13
+      ],
+      [
+        "{\"clf__alpha\": 1.0, \"clf__min_categories\": 10, \"diskretisasi__n_bins\": 10, \"diskretisasi__strategy\": \"kmeans\"}",
+        9
+      ]
+    ]
+  }
+]
