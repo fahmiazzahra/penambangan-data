@@ -1,0 +1,230 @@
+{
+  "dibuat_pada": "2026-10-29T04:00:58+00:00",
+  "dataset": {
+    "file": "maternal_health_risk.csv",
+    "sha256": "a1f7025719f84715096e0d1f95ae2e56b57809b9b15449e1836c96a7d976ae9b",
+    "n_latih": 452,
+    "distribusi_kelas": {
+      "low risk": 234,
+      "high risk": 112,
+      "mid risk": 106
+    },
+    "rentang_atribut": {
+      "Age": {
+        "min": 10.0,
+        "max": 70.0
+      },
+      "SystolicBP": {
+        "min": 70.0,
+        "max": 160.0
+      },
+      "DiastolicBP": {
+        "min": 49.0,
+        "max": 100.0
+      },
+      "BS": {
+        "min": 6.0,
+        "max": 19.0
+      },
+      "BodyTemp": {
+        "min": 98.0,
+        "max": 103.0
+      },
+      "HeartRate": {
+        "min": 7.0,
+        "max": 90.0
+      }
+    }
+  },
+  "versi": {
+    "python": "3.15.1",
+    "scikit-learn": "1.9.1"
+  },
+  "fitur": [
+    "Age",
+    "SystolicBP",
+    "DiastolicBP",
+    "BS",
+    "BodyTemp",
+    "HeartRate"
+  ],
+  "model": {
+    "NB-G": {
+      "nama": "Gaussian Naive Bayes",
+      "parameter_terbaik": {
+        "clf__var_smoothing": 1e-12
+      },
+      "skor_cv_grid_search_f1_macro": 0.519,
+      "nested_cv_skenario_B": {
+        "accuracy": {
+          "mean": 0.6459,
+          "std": 0.0502
+        },
+        "balanced_accuracy": {
+          "mean": 0.5272,
+          "std": 0.0645
+        },
+        "f1_macro": {
+          "mean": 0.5144,
+          "std": 0.0692
+        },
+        "recall_high": {
+          "mean": 0.5273,
+          "std": 0.1706
+        },
+        "recall_mid": {
+          "mean": 0.1088,
+          "std": 0.093
+        },
+        "recall_low": {
+          "mean": 0.9454,
+          "std": 0.0486
+        },
+        "precision_high": {
+          "mean": 0.7873,
+          "std": 0.1447
+        },
+        "auc_ovr_macro": {
+          "mean": 0.7689,
+          "std": 0.0464
+        }
+      }
+    },
+    "NB-K": {
+      "nama": "Categorical Naive Bayes (diskretisasi + Laplace)",
+      "parameter_terbaik": {
+        "clf__alpha": 0.5,
+        "clf__min_categories": 10,
+        "diskretisasi__n_bins": 10,
+        "diskretisasi__strategy": "kmeans"
+      },
+      "skor_cv_grid_search_f1_macro": 0.6298,
+      "nested_cv_skenario_B": {
+        "accuracy": {
+          "mean": 0.6982,
+          "std": 0.0635
+        },
+        "balanced_accuracy": {
+          "mean": 0.6186,
+          "std": 0.076
+        },
+        "f1_macro": {
+          "mean": 0.6152,
+          "std": 0.0807
+        },
+        "recall_high": {
+          "mean": 0.7016,
+          "std": 0.1577
+        },
+        "recall_mid": {
+          "mean": 0.2595,
+          "std": 0.1448
+        },
+        "recall_low": {
+          "mean": 0.8947,
+          "std": 0.064
+        },
+        "precision_high": {
+          "mean": 0.7658,
+          "std": 0.1111
+        },
+        "auc_ovr_macro": {
+          "mean": 0.7935,
+          "std": 0.0507
+        }
+      }
+    },
+    "DT": {
+      "nama": "Decision Tree (CART)",
+      "parameter_terbaik": {
+        "clf__class_weight": "balanced",
+        "clf__criterion": "entropy",
+        "clf__max_depth": 6,
+        "clf__min_samples_leaf": 5
+      },
+      "skor_cv_grid_search_f1_macro": 0.6413,
+      "nested_cv_skenario_B": {
+        "accuracy": {
+          "mean": 0.6925,
+          "std": 0.0636
+        },
+        "balanced_accuracy": {
+          "mean": 0.6223,
+          "std": 0.0659
+        },
+        "f1_macro": {
+          "mean": 0.6141,
+          "std": 0.0722
+        },
+        "recall_high": {
+          "mean": 0.739,
+          "std": 0.1267
+        },
+        "recall_mid": {
+          "mean": 0.2645,
+          "std": 0.151
+        },
+        "recall_low": {
+          "mean": 0.8635,
+          "std": 0.1006
+        },
+        "precision_high": {
+          "mean": 0.7455,
+          "std": 0.1261
+        },
+        "auc_ovr_macro": {
+          "mean": 0.7793,
+          "std": 0.0554
+        }
+      },
+      "kedalaman": 6,
+      "jumlah_daun": 24
+    },
+    "KNN": {
+      "nama": "K-Nearest Neighbor",
+      "parameter_terbaik": {
+        "clf__n_neighbors": 13,
+        "clf__p": 1,
+        "clf__weights": "uniform",
+        "skala": "StandardScaler"
+      },
+      "skor_cv_grid_search_f1_macro": 0.5992,
+      "nested_cv_skenario_B": {
+        "accuracy": {
+          "mean": 0.6687,
+          "std": 0.0501
+        },
+        "balanced_accuracy": {
+          "mean": 0.5793,
+          "std": 0.0616
+        },
+        "f1_macro": {
+          "mean": 0.5686,
+          "std": 0.0666
+        },
+        "recall_high": {
+          "mean": 0.6579,
+          "std": 0.1542
+        },
+        "recall_mid": {
+          "mean": 0.1893,
+          "std": 0.1228
+        },
+        "recall_low": {
+          "mean": 0.8907,
+          "std": 0.0617
+        },
+        "precision_high": {
+          "mean": 0.7259,
+          "std": 0.117
+        },
+        "auc_ovr_macro": {
+          "mean": 0.7667,
+          "std": 0.0511
+        }
+      }
+    }
+  },
+  "model_rekomendasi": "DT",
+  "dasar_rekomendasi": "macro-F1 tertinggi pada skenario B adalah NB-K; kandidat yang tidak berbeda signifikan (p Holm >= 0,05): NB-K, DT, KNN; dipilih recall Risiko Tinggi tertinggi"
+}

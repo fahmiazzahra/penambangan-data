@@ -1,0 +1,70 @@
+|--- Kadar gula darah (mmol/L) <= 7.95
+|   |--- Tekanan darah sistolik (mmHg) <= 132.50
+|   |   |--- Suhu tubuh (°F) <= 99.50
+|   |   |   |--- Tekanan darah sistolik (mmHg) <= 129.50
+|   |   |   |   |--- Usia (tahun) <= 24.50
+|   |   |   |   |   |--- Tekanan darah diastolik (mmHg) <= 49.50
+|   |   |   |   |   |   |--- weights: [0.00, 8.37, 0.00] class: low risk
+|   |   |   |   |   |--- Tekanan darah diastolik (mmHg) >  49.50
+|   |   |   |   |   |   |--- weights: [0.00, 73.40, 42.64] class: low risk
+|   |   |   |   |--- Usia (tahun) >  24.50
+|   |   |   |   |   |--- Kadar gula darah (mmol/L) <= 6.85
+|   |   |   |   |   |   |--- weights: [0.00, 9.66, 17.06] class: mid risk
+|   |   |   |   |   |--- Kadar gula darah (mmol/L) >  6.85
+|   |   |   |   |   |   |--- weights: [10.76, 43.78, 17.06] class: low risk
+|   |   |   |--- Tekanan darah sistolik (mmHg) >  129.50
+|   |   |   |   |--- weights: [0.00, 0.00, 12.79] class: mid risk
+|   |   |--- Suhu tubuh (°F) >  99.50
+|   |   |   |--- Usia (tahun) <= 17.50
+|   |   |   |   |--- Tekanan darah sistolik (mmHg) <= 87.50
+|   |   |   |   |   |--- weights: [4.04, 1.93, 0.00] class: high risk
+|   |   |   |   |--- Tekanan darah sistolik (mmHg) >  87.50
+|   |   |   |   |   |--- Tekanan darah diastolik (mmHg) <= 64.00
+|   |   |   |   |   |   |--- weights: [2.69, 3.86, 4.26] class: mid risk
+|   |   |   |   |   |--- Tekanan darah diastolik (mmHg) >  64.00
+|   |   |   |   |   |   |--- weights: [9.42, 1.93, 5.69] class: high risk
+|   |   |   |--- Usia (tahun) >  17.50
+|   |   |   |   |--- Kadar gula darah (mmol/L) <= 7.11
+|   |   |   |   |   |--- Suhu tubuh (°F) <= 101.50
+|   |   |   |   |   |   |--- weights: [0.00, 0.64, 12.79] class: mid risk
+|   |   |   |   |   |--- Suhu tubuh (°F) >  101.50
+|   |   |   |   |   |   |--- weights: [0.00, 3.86, 2.84] class: low risk
+|   |   |   |   |--- Kadar gula darah (mmol/L) >  7.11
+|   |   |   |   |   |--- Usia (tahun) <= 26.50
+|   |   |   |   |   |   |--- weights: [1.35, 1.29, 2.84] class: mid risk
+|   |   |   |   |   |--- Usia (tahun) >  26.50
+|   |   |   |   |   |   |--- weights: [2.69, 0.00, 4.26] class: mid risk
+|   |--- Tekanan darah sistolik (mmHg) >  132.50
+|   |   |--- Tekanan darah diastolik (mmHg) <= 82.50
+|   |   |   |--- weights: [5.38, 0.00, 1.42] class: high risk
+|   |   |--- Tekanan darah diastolik (mmHg) >  82.50
+|   |   |   |--- weights: [17.49, 0.00, 0.00] class: high risk
+|--- Kadar gula darah (mmol/L) >  7.95
+|   |--- Tekanan darah sistolik (mmHg) <= 135.00
+|   |   |--- Tekanan darah sistolik (mmHg) <= 115.00
+|   |   |   |--- Kadar gula darah (mmol/L) <= 9.50
+|   |   |   |   |--- Denyut jantung (bpm) <= 83.00
+|   |   |   |   |   |--- weights: [6.73, 0.00, 1.42] class: high risk
+|   |   |   |   |--- Denyut jantung (bpm) >  83.00
+|   |   |   |   |   |--- weights: [2.69, 0.00, 4.26] class: mid risk
+|   |   |   |--- Kadar gula darah (mmol/L) >  9.50
+|   |   |   |   |--- Tekanan darah diastolik (mmHg) <= 62.50
+|   |   |   |   |   |--- weights: [10.76, 0.00, 0.00] class: high risk
+|   |   |   |   |--- Tekanan darah diastolik (mmHg) >  62.50
+|   |   |   |   |   |--- weights: [9.42, 0.00, 0.00] class: high risk
+|   |   |--- Tekanan darah sistolik (mmHg) >  115.00
+|   |   |   |--- Kadar gula darah (mmol/L) <= 9.50
+|   |   |   |   |--- weights: [2.69, 1.29, 7.11] class: mid risk
+|   |   |   |--- Kadar gula darah (mmol/L) >  9.50
+|   |   |   |   |--- Usia (tahun) <= 38.50
+|   |   |   |   |   |--- weights: [8.07, 0.00, 0.00] class: high risk
+|   |   |   |   |--- Usia (tahun) >  38.50
+|   |   |   |   |   |--- Kadar gula darah (mmol/L) <= 12.50
+|   |   |   |   |   |   |--- weights: [4.04, 0.64, 5.69] class: mid risk
+|   |   |   |   |   |--- Kadar gula darah (mmol/L) >  12.50
+|   |   |   |   |   |   |--- weights: [16.14, 0.00, 8.53] class: high risk
+|   |--- Tekanan darah sistolik (mmHg) >  135.00
+|   |   |--- Usia (tahun) <= 33.50
+|   |   |   |--- weights: [8.07, 0.00, 0.00] class: high risk
+|   |   |--- Usia (tahun) >  33.50
+|   |   |   |--- weights: [28.25, 0.00, 0.00] class: high risk
