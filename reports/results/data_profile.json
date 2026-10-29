@@ -1,0 +1,32 @@
+{
+  "n_baris_mentah": 1014,
+  "n_atribut": 6,
+  "n_missing": 0,
+  "n_duplikat_eksak": 562,
+  "persen_duplikat": 55.42,
+  "n_baris_terlibat_duplikasi": 866,
+  "pengulangan_maksimum": 27,
+  "n_baris_unik": 452,
+  "n_vektor_konflik": 35,
+  "n_baris_unik_konflik": 71,
+  "n_baris_tanpa_konflik": 381,
+  "nilai_tidak_wajar_mentah": {
+    "HeartRate": 2
+  },
+  "nilai_tidak_wajar_unik": {
+    "HeartRate": 1
+  },
+  "distribusi_kelas_mentah": {
+    "low risk": 406,
+    "mid risk": 336,
+    "high risk": 272
+  },
+  "distribusi_kelas_unik": {
+    "low risk": 234,
+    "mid risk": 106,
+    "high risk": 112
+  },
+  "usia_di_bawah_15_unik": 30,
+  "usia_di_atas_50_unik": 45,
+  "sistolik_tidak_lebih_besar_dari_diastolik": 0
+}
