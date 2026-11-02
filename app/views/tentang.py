@@ -72,7 +72,7 @@ st.code(
 .venv\\Scripts\\activate          # Windows  (Linux/Mac: source .venv/bin/activate)
 pip install -r requirements.txt
 python -m src.eda                 # profil data + grafik EDA
-python -m src.experiment          # eksperimen 10x10 nested CV (± 30-60 menit)
+python -m src.experiment          # eksperimen 10x10 nested CV (± 20 menit)
 python -m src.train_final         # model final untuk aplikasi
 streamlit run app/streamlit_app.py""",
     language="bash",

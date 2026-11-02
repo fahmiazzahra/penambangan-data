@@ -13,11 +13,11 @@ Proposal UTS dan aplikasi (luaran UAS) mata kuliah Penambangan Data, Teknik Info
 
 ## Inti penelitian
 
-Dataset publik *Maternal Health Risk* (UCI) sering dipakai dengan akurasi yang dilaporkan 80–97%. Audit data menemukan
+Dataset publik *Maternal Health Risk* (UCI) sering dipakai dengan akurasi yang dilaporkan 61–97%. Pemeriksaan data menemukan
 **562 dari 1.014 baris (55,4%) adalah duplikat persis**. Jika data dibagi tanpa deduplikasi, rata-rata **83,4% baris di
 setiap fold uji punya salinan identik di data latih**, sehingga model cukup "menghafal" (kebocoran data).
 
-Penelitian ini membandingkan NB, DT, dan KNN dengan protokol yang bebas kebocoran: deduplikasi, validasi berbasis grup,
+Penelitian ini membandingkan NB, DT, dan KNN dengan cara evaluasi yang bebas kebocoran: deduplikasi, validasi berbasis grup,
 dan *nested cross-validation* 10×10.
 
 ## Hasil eksperimen (konfigurasi hasil tuning, rata-rata 100 fold uji)
@@ -71,7 +71,7 @@ Detail lengkap ada di `reports/results/` dan halaman **Evaluasi Model** pada apl
 
 ## Cara menjalankan
 
-Membutuhkan Python 3.11 atau lebih baru.
+Membutuhkan Python 3.12 atau lebih baru.
 
 ```bash
 python -m venv .venv
