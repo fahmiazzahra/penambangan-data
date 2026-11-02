@@ -4,6 +4,8 @@
 
 Proposal UTS dan aplikasi (luaran UAS) mata kuliah Penambangan Data, Teknik Informatika S1, Universitas Dian Nuswantoro.
 
+**Aplikasi online:** https://risiko-ibu-hamil-fafa.streamlit.app
+
 | | |
 |---|---|
 | Nama | Fahmi Fatmawati Azzahra |
@@ -104,7 +106,7 @@ menggambar ulang grafik saja, pakai `python -m src.experiment --plots-only`.
 1. Push repositori ini ke GitHub.
 2. Buka https://share.streamlit.io, masuk dengan akun GitHub, lalu pilih **Create app**.
 3. Pilih repositori dan branch `main`, isi *Main file path* dengan `app/streamlit_app.py`.
-4. Di **Advanced settings**, pilih Python 3.12 atau 3.13, lalu klik **Deploy**.
+4. Di **Advanced settings**, pilih Python 3.12 atau yang lebih baru (aplikasi ini berjalan di 3.14), lalu klik **Deploy**.
 
 Jika model `.joblib` gagal dimuat di server karena perbedaan versi library, aplikasi otomatis melatih ulang model dari
 data memakai hyperparameter yang tersimpan di `models/metadata.json`.
