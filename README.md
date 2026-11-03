@@ -57,6 +57,7 @@ Detail lengkap ada di `reports/results/` dan halaman **Evaluasi Model** pada apl
 │   ├── eda.py            EDA dan grafik
 │   ├── experiment.py     nested CV 10×10, uji statistik, grafik hasil
 │   ├── train_final.py    melatih model final untuk aplikasi
+│   ├── uji_tuning.py     uji pengaruh tuning (parameter bawaan vs hasil tuning)
 │   └── viz.py            gaya grafik
 ├── app/
 │   ├── streamlit_app.py  aplikasi utama (navigasi)
@@ -94,6 +95,7 @@ Mengulang seluruh analisis dari awal (urutannya penting):
 ```bash
 python -m src.eda
 python -m src.experiment
+python -m src.uji_tuning
 python -m src.train_final
 python tests/uji_aplikasi.py
 ```
