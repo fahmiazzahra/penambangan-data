@@ -6,7 +6,7 @@ TC02-NB-K,Input bawaan dengan algoritma NB-K,"Prediksi, probabilitas, dan penjel
 TC02-KNN,Input bawaan dengan algoritma KNN,"Prediksi, probabilitas, dan penjelasan tampil",LULUS,**Prediksi: Risiko Rendah** · K-Nearest Neighbor · keyakinan 69%
 TC03,"Pasien berisiko tinggi (35 th, 140/90, gula 13 mmol/L)",Prediksi Risiko Tinggi + catatan hipertensi,LULUS,**Prediksi: Risiko Tinggi** · Decision Tree · keyakinan 100%
 TC04,Sistolik (80) ≤ diastolik (90),"Pesan validasi muncul, prediksi tidak dibuat",LULUS,Tekanan sistolik harus lebih besar daripada diastolik. Periksa kembali input.
-TC05,"Konversi satuan: 234 mg/dL = 13 mmol/L dan 98,6 °F = 37 °C",Prediksi sama dan nilai terkirim 13.00 mmol/L,LULUS,**Prediksi: Risiko Tinggi** · Decision Tree · keyakinan 100% | **Prediksi: Risiko Tinggi** · Decision Tree · keyakinan 100%
+TC05,"Konversi satuan: 234 mg/dL = 13 mmol/L dan 98,6 °F = 37 °C","Prediksi sama dan nilai terkirim 13,00 mmol/L",LULUS,**Prediksi: Risiko Tinggi** · Decision Tree · keyakinan 100% | **Prediksi: Risiko Tinggi** · Decision Tree · keyakinan 100%
 TC06,"Gula darah 25 mmol/L (di atas data latih, maks 19)",Peringatan di luar rentang data latih,LULUS,
 TC07,"Unggah CSV 4 baris (2 valid, 2 tidak valid)","2 baris diprediksi, 2 baris dilewati dengan peringatan",LULUS,baris hasil = 2
-TC08,Waktu respons prediksi satu pasien,< 1 detik untuk setiap algoritma,LULUS,"NB-G: 6.0 ms, NB-K: 6.2 ms, DT: 2.8 ms, KNN: 14.0 ms"
+TC08,Waktu respons prediksi satu pasien,< 1 detik untuk setiap algoritma,LULUS,"NB-G: 1.0 ms, NB-K: 1.1 ms, DT: 0.5 ms, KNN: 3.6 ms"

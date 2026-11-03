@@ -12,6 +12,8 @@ from common import (
     MODEL_CODES,
     MODEL_LABEL,
     RISK_STATUS,
+    angka,
+    angka_ringkas,
     explain_categorical_nb,
     explain_gaussian_nb,
     explain_knn,
@@ -22,6 +24,7 @@ from common import (
     out_of_range,
     palette,
     predict_one,
+    tabel,
 )
 
 meta = load_metadata()
@@ -31,7 +34,7 @@ default_index = MODEL_CODES.index(recommended) if recommended in MODEL_CODES els
 
 
 def model_option_label(code):
-    return MODEL_LABEL[code] + (" — rekomendasi" if code == recommended else "")
+    return MODEL_LABEL[code] + (" (rekomendasi)" if code == recommended else "")
 
 
 def proba_chart(probs: dict):
@@ -43,13 +46,13 @@ def proba_chart(probs: dict):
             "prob": [probs[c] for c in CLASS_ORDER],
         }
     )
-    df["label"] = (df.prob * 100).round(1).astype(str) + "%"
+    df["label"] = (df.prob * 100).map(lambda v: angka(v, 1)) + "%"
     base = alt.Chart(df).encode(
         y=alt.Y("kelas:N", sort=[CLASS_LABEL_ID[c] for c in CLASS_ORDER], title=None,
                 scale=alt.Scale(paddingInner=0.3), axis=alt.Axis(labelOverlap=False)),
         x=alt.X("prob:Q", scale=alt.Scale(domain=[0, 1.12]),
                 axis=alt.Axis(format="%", title="Probabilitas", values=[0, 0.25, 0.5, 0.75, 1])),
-        tooltip=[alt.Tooltip("kelas:N", title="Kelas"), alt.Tooltip("prob:Q", title="Probabilitas", format=".1%")],
+        tooltip=[alt.Tooltip("kelas:N", title="Kelas"), alt.Tooltip("label:N", title="Probabilitas")],
     )
     bars = base.mark_bar(cornerRadiusEnd=4).encode(
         color=alt.Color(
@@ -111,23 +114,25 @@ def render_result(code: str, x: np.ndarray):
                 "tersebut lebih mendukung kelas itu."
             )
             fn = explain_gaussian_nb if code == "NB-G" else explain_categorical_nb
-            st.dataframe(fn(model, x).round(3), hide_index=True)
+            st.dataframe(tabel(fn(model, x), 3, {"Nilai": angka_ringkas}), hide_index=True)
         else:
             k = model.named_steps["clf"].n_neighbors
             st.markdown(f"KNN memakai suara mayoritas dari **{k} tetangga terdekat** pada data latih:")
-            st.dataframe(explain_knn(model, x), hide_index=True)
+            tetangga = explain_knn(model, x)
+            kolom = {c: angka_ringkas for c in tetangga.select_dtypes("float").columns if c != "Jarak"}
+            st.dataframe(tabel(tetangga, 3, kolom), hide_index=True)
 
     with st.expander("Bandingkan semua algoritma", icon=":material/compare_arrows:"):
         rows = []
         for c in MODEL_CODES:
             p, pr = predict_one(models[c], x)
             rows.append({"Algoritma": MODEL_LABEL[c], "Prediksi": CLASS_LABEL_ID[p],
-                         **{CLASS_LABEL_ID[k]: pr[k] for k in CLASS_ORDER}})
+                         **{CLASS_LABEL_ID[k]: 100 * pr[k] for k in CLASS_ORDER}})
         st.dataframe(
             pd.DataFrame(rows),
             hide_index=True,
             column_config={
-                CLASS_LABEL_ID[k]: st.column_config.ProgressColumn(format="percent", min_value=0, max_value=1)
+                CLASS_LABEL_ID[k]: st.column_config.ProgressColumn(format="%.0f%%", min_value=0, max_value=100)
                 for k in CLASS_ORDER
             },
         )
@@ -139,7 +144,7 @@ def render_single():
         st.subheader("Data pemeriksaan")
         code = st.selectbox(
             "Algoritma", MODEL_CODES, index=default_index, format_func=model_option_label,
-            help="Rekomendasi = macro-F1 tertinggi pada evaluasi nested cross-validation skenario B.",
+            help="Dipilih dari evaluasi Skenario B: macro-F1 tertinggi; jika selisihnya tidak signifikan, dipilih recall Risiko Tinggi tertinggi.",
         )
         age = st.number_input("Usia (tahun)", min_value=10, max_value=70, value=25, step=1)
         c1, c2 = st.columns(2)
@@ -161,7 +166,7 @@ def render_single():
 
         hr = st.number_input("Denyut jantung (bpm)", 40, 200, 76, step=1)
         st.caption(
-            f"Nilai yang dikirim ke model: gula darah **{bs:.2f} mmol/L**, suhu **{temp_f:.1f} °F** "
+            f"Nilai yang dikirim ke model: gula darah **{angka(bs, 2)} mmol/L**, suhu **{angka(temp_f, 1)} °F** "
             "(satuan sesuai dataset)."
         )
 
@@ -211,7 +216,7 @@ def render_batch():
     out["Prediksi"] = [CLASS_LABEL_ID[p] for p in m.predict(Xv)]
     for i, c in enumerate(m.classes_):
         out[f"P({CLASS_LABEL_ID[c]})"] = proba[:, i].round(4)
-    st.dataframe(out, hide_index=True)
+    st.dataframe(tabel(out, 4, {c: angka_ringkas for c in FEATURES if out[c].dtype.kind == "f"}), hide_index=True)
     st.download_button("Unduh hasil prediksi", out.to_csv(index=False), "hasil_prediksi.csv", "text/csv",
                        icon=":material/download:")
 

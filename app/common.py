@@ -40,7 +40,7 @@ MODEL_LABEL = {
 }
 SCENARIO_LABEL = {
     "A": "A · Data mentah",
-    "B": "B · Deduplikasi (usulan)",
+    "B": "B · Tanpa duplikat (usulan)",
     "C": "C · B tanpa label konflik",
 }
 RISK_STATUS = {
@@ -77,6 +77,29 @@ def palette() -> dict:
 
 def feature_label(f: str) -> str:
     return f"{FEATURE_INFO[f]['nama']} ({FEATURE_INFO[f]['satuan']})"
+
+
+# ----------------------------------------------------------------------------- format angka
+def angka(x, d: int = 3, tanda: bool = False) -> str:
+    """Format angka Indonesia: koma desimal, titik ribuan, dan tanda minus yang benar."""
+    s = f"{x:+,.{d}f}" if tanda else f"{x:,.{d}f}"
+    return s.replace(",", "_").replace(".", ",").replace("_", ".").replace("-", "−")
+
+
+def angka_ringkas(x) -> str:
+    """Seperti angka(), tetapi tanpa nol yang tidak perlu (7,5 dan 98)."""
+    return f"{x:g}".replace(".", ",").replace("-", "−")
+
+
+def nilai_p(p) -> str:
+    return "< 0,001" if p < 0.001 else angka(p, 3)
+
+
+def tabel(df: pd.DataFrame, presisi: int = 3, format_kolom: dict | None = None):
+    """Tabel untuk st.dataframe dengan koma desimal. Nilai aslinya tetap angka, sehingga kolom
+    masih bisa diurutkan dengan benar."""
+    fmt = {c: (lambda v: angka(v, presisi)) for c in df.select_dtypes("float").columns}
+    return df.style.format(fmt | (format_kolom or {}), na_rep="–")
 
 
 # ----------------------------------------------------------------------------- data & model
@@ -162,7 +185,7 @@ def out_of_range(x: np.ndarray) -> list[str]:
         if f == "HeartRate":
             lo = max(lo, PLAUSIBLE_RANGE[f][0])
         if not lo <= v <= hi:
-            msgs.append(f"{feature_label(f)} = {v:g} di luar rentang data latih ({lo:g}–{hi:g})")
+            msgs.append(f"{feature_label(f)} = {angka_ringkas(v)} di luar rentang data latih ({angka_ringkas(lo)}–{angka_ringkas(hi)})")
     return msgs
 
 
@@ -179,7 +202,7 @@ def explain_tree(model, x: np.ndarray) -> list[str]:
         thr = t.threshold[node]
         val = xt[0, f]
         sign = "≤" if val <= thr else ">"
-        steps.append(f"{feature_label(FEATURES[f])} = **{val:g}** {sign} {thr:.2f}")
+        steps.append(f"{feature_label(FEATURES[f])} = **{angka_ringkas(val)}** {sign} {angka(thr, 2)}")
     return steps
 
 

@@ -105,7 +105,7 @@ at.run()
 p_mgdl = prediction_text(at)
 cap = " ".join(c.value for c in at.caption)
 record("TC05", "Konversi satuan: 234 mg/dL = 13 mmol/L dan 98,6 °F = 37 °C",
-       "Prediksi sama dan nilai terkirim 13.00 mmol/L", p_mmol == p_mgdl and "13.00 mmol/L" in cap, f"{p_mmol} | {p_mgdl}")
+       "Prediksi sama dan nilai terkirim 13,00 mmol/L", p_mmol == p_mgdl and "13,00 mmol/L" in cap, f"{p_mmol} | {p_mgdl}")
 
 # ---------------------------------------------------------------------------- TC06
 at = fresh()

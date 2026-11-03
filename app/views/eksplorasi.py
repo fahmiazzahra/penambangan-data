@@ -7,11 +7,14 @@ from common import (
     CLASS_ORDER,
     FEATURES,
     TARGET,
+    angka,
+    angka_ringkas,
     feature_label,
     is_dark,
     load_raw_df,
     load_results,
     palette,
+    tabel,
 )
 
 st.title("Eksplorasi Data")
@@ -28,22 +31,22 @@ pal = palette()
 
 row1, row2 = st.columns(2), st.columns(2)
 row1[0].metric("Baris data mentah", f"{len(raw):,}".replace(",", "."), border=True)
-row1[1].metric("Duplikat eksak", f"{raw.duplicated().sum()}",
-               f"{100 * raw.duplicated().mean():.1f}% dari data", delta_color="off", delta_arrow="off", border=True)
+row1[1].metric("Duplikat persis", f"{raw.duplicated().sum()}",
+               f"{angka(100 * raw.duplicated().mean(), 1)}% dari data", delta_color="off", delta_arrow="off", border=True)
 row2[0].metric("Baris unik", f"{len(dedup)}", border=True)
-row2[1].metric("Atribut identik, label berbeda", f"{prof.get('n_vektor_konflik', '–')} vektor",
+row2[1].metric("Atribut identik, label berbeda", f"{prof.get('n_vektor_konflik', '–')} kombinasi",
                f"{prof.get('n_baris_unik_konflik', '–')} baris unik", delta_color="off", delta_arrow="off",
                border=True)
 
-st.subheader("Distribusi kelas: sebelum dan sesudah deduplikasi")
+st.subheader("Distribusi kelas: sebelum dan sesudah duplikat dihapus")
 dist = pd.concat(
     [
         raw[TARGET].value_counts().rename("jumlah").to_frame().assign(versi="Data mentah"),
-        dedup[TARGET].value_counts().rename("jumlah").to_frame().assign(versi="Setelah deduplikasi"),
+        dedup[TARGET].value_counts().rename("jumlah").to_frame().assign(versi="Setelah duplikat dihapus"),
     ]
 ).reset_index(names="kode")
 dist["kelas"] = dist.kode.map(CLASS_LABEL_ID)
-dist["persen"] = dist.jumlah / dist.groupby("versi").jumlah.transform("sum")
+dist["persen"] = (100 * dist.jumlah / dist.groupby("versi").jumlah.transform("sum")).map(lambda v: angka(v, 1)) + "%"
 order = [CLASS_LABEL_ID[c] for c in CLASS_ORDER]
 chart = (
     alt.Chart(dist)
@@ -55,24 +58,24 @@ chart = (
         color=alt.Color("versi:N", scale=alt.Scale(range=[pal["scenario"]["A"], pal["scenario"]["B"]]),
                         legend=alt.Legend(title=None, orient="top")),
         tooltip=[alt.Tooltip("versi:N", title="Versi"), alt.Tooltip("kelas:N", title="Kelas"),
-                 alt.Tooltip("jumlah:Q", title="Jumlah"), alt.Tooltip("persen:Q", title="Proporsi", format=".1%")],
+                 alt.Tooltip("jumlah:Q", title="Jumlah"), alt.Tooltip("persen:N", title="Proporsi")],
     )
     .properties(height=300)
 )
 st.altair_chart(chart, width="stretch")
 st.markdown(
-    f"Sebanyak **{raw.duplicated().sum()} baris ({100 * raw.duplicated().mean():.1f}%)** adalah salinan persis "
+    f"Sebanyak **{raw.duplicated().sum()} baris ({angka(100 * raw.duplicated().mean(), 1)}%)** adalah salinan persis "
     "baris lain, dan satu kombinasi nilai bisa berulang hingga "
     f"**{prof.get('pengulangan_maksimum', '–')} kali**. Duplikasi paling banyak terjadi pada kelas *Risiko Sedang*, "
-    "sehingga proporsi kelas berubah setelah deduplikasi. Bila data mentah langsung dibagi menjadi data "
+    "sehingga proporsi kelas berubah setelah duplikat dihapus. Bila data mentah langsung dibagi menjadi data "
     "latih dan uji, salinan yang sama dapat muncul di keduanya dan membuat akurasi tampak lebih tinggi "
     "daripada kemampuan model yang sebenarnya (kebocoran data)."
 )
 
 st.subheader("Sebaran atribut per tingkat risiko")
 feat = st.segmented_control("Atribut", FEATURES, default="BS", format_func=feature_label, required=True)
-src = st.radio("Data", ["Setelah deduplikasi", "Data mentah"], horizontal=True)
-d = (dedup if src == "Setelah deduplikasi" else raw).copy()
+src = st.radio("Data", ["Setelah duplikat dihapus", "Data mentah"], horizontal=True)
+d = (dedup if src == "Setelah duplikat dihapus" else raw).copy()
 d["kelas"] = d[TARGET].map(CLASS_LABEL_ID)
 box = (
     alt.Chart(d)
@@ -80,7 +83,8 @@ box = (
                   ticks={"color": "#898781"}, outliers={"color": "#898781"})
     .encode(
         x=alt.X("kelas:N", sort=order, title=None, axis=alt.Axis(labelAngle=0)),
-        y=alt.Y(f"{feat}:Q", title=feature_label(feat), scale=alt.Scale(zero=False)),
+        y=alt.Y(f"{feat}:Q", title=feature_label(feat), scale=alt.Scale(zero=False),
+                axis=alt.Axis(labelExpr="replace(format(datum.value, '~g'), '.', ',')")),
         color=alt.Color(f"{TARGET}:N", scale=alt.Scale(domain=CLASS_ORDER, range=[pal["risk"][c] for c in CLASS_ORDER]),
                         legend=None),
     )
@@ -88,7 +92,7 @@ box = (
 )
 st.altair_chart(box, width="stretch")
 med = d.groupby("kelas")[feat].median().reindex(order)
-st.caption("Median per kelas: " + " · ".join(f"{k}: **{v:g}**" for k, v in med.items()))
+st.caption("Median per kelas: " + " · ".join(f"{k}: **{angka_ringkas(v)}**" for k, v in med.items()))
 
 st.subheader("Korelasi antaratribut (Spearman, data unik)")
 cd = dedup.copy()
@@ -97,29 +101,31 @@ cols = FEATURES + ["Tingkat risiko"]
 corr = cd[cols].corr(method="spearman")
 names = {f: feature_label(f) for f in FEATURES} | {"Tingkat risiko": "Tingkat risiko (ordinal)"}
 long = corr.rename(index=names, columns=names).reset_index(names="a").melt("a", var_name="b", value_name="r")
+long["teks"] = long.r.map(lambda v: angka(v, 2))
 heat = alt.Chart(long).encode(
     x=alt.X("b:N", sort=list(names.values()), title=None, axis=alt.Axis(labelAngle=-35)),
     y=alt.Y("a:N", sort=list(names.values()), title=None),
     tooltip=[alt.Tooltip("a:N", title="Atribut 1"), alt.Tooltip("b:N", title="Atribut 2"),
-             alt.Tooltip("r:Q", title="ρ", format=".2f")],
+             alt.Tooltip("teks:N", title="ρ")],
 )
 rect = heat.mark_rect().encode(
     color=alt.Color("r:Q", scale=alt.Scale(domain=[-1, 0, 1], range=pal["div"], interpolate="lab"),
-                    legend=alt.Legend(title="ρ"))
+                    legend=alt.Legend(title="ρ", labelExpr="replace(format(datum.value, '.1f'), '.', ',')"))
 )
 if is_dark():
     txt_color = alt.value("#f0efec")
 else:
     txt_color = alt.when("abs(datum.r) > 0.6").then(alt.value("#ffffff")).otherwise(alt.value("#0b0b0b"))
-txt = heat.mark_text(fontSize=11).encode(text=alt.Text("r:Q", format=".2f"), color=txt_color)
+txt = heat.mark_text(fontSize=11).encode(text=alt.Text("teks:N"), color=txt_color)
 st.altair_chart((rect + txt).properties(height=380), width="stretch")
 
 st.subheader("Data")
 only_dup = st.toggle("Tampilkan hanya baris yang memiliki duplikat")
 view = raw[raw.duplicated(keep=False)] if only_dup else raw
+tampil = view.rename(columns={f: feature_label(f) for f in FEATURES} | {TARGET: "Tingkat risiko"})
 st.dataframe(
-    view.rename(columns={f: feature_label(f) for f in FEATURES} | {TARGET: "Tingkat risiko"}),
+    tabel(tampil, format_kolom={c: angka_ringkas for c in tampil.select_dtypes("float").columns}),
     hide_index=False,
     height=320,
 )
-st.caption(f"{len(view)} baris ditampilkan. Indeks = nomor baris pada file CSV asli (mulai dari 0).")
+st.caption(f"{angka(len(view), 0)} baris ditampilkan. Indeks = nomor baris pada file CSV asli (mulai dari 0).")
